@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f4f7fb">
+<title>N픽 | 추천 숙소</title>
+<style>
+  :root {
+    --page: #f2f6fb;
+    --card: #fff;
+    --ink: #111a3a;
+    --muted: #7b8498;
+    --line: #e4e9f1;
+    --notice: #fffbdc;
+    --accent: #2868ed;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--page);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+      "Malgun Gothic", "Noto Sans KR", sans-serif;
+  }
+  button, input { font: inherit; }
+  .page { width: 100%; max-width: 760px; margin: 0 auto; min-height: 100vh; }
+  .notice {
+    overflow: hidden;
+    white-space: nowrap;
+    background: var(--notice);
+    border-bottom: 1px solid #f0edcf;
+    color: #242424;
+    padding: 12px 0;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .ticker-track {
+    display: flex;
+    width: max-content;
+    animation: ticker 34s linear infinite;
+  }
+  .ticker-group { flex: 0 0 auto; padding-right: 48px; }
+  .notice:hover .ticker-track { animation-play-state: paused; }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .intro {
+    padding: 24px 20px 18px;
+    background: linear-gradient(180deg, #dff4ff 0%, #eef8fc 75%, var(--page) 100%);
+  }
+  .heading { display: flex; align-items: center; gap: 12px; margin: 0 0 18px; }
+  .heading .plane { font-size: 31px; line-height: 1; }
+  h1 { font-size: 27px; margin: 0; font-weight: 800; letter-spacing: -1px; }
+  .tools { display: flex; align-items: stretch; gap: 10px; }
+  .search-wrap {
+    display: flex; align-items: center; gap: 10px;
+    min-width: 0; flex: 1; background: #fff; border: 1px solid var(--line);
+    border-radius: 999px; padding: 0 15px; min-height: 52px;
+    box-shadow: 0 2px 7px rgba(31, 56, 89, .04);
+  }
+  .search-icon { color: #737d91; font-size: 22px; }
+  #searchInput {
+    width: 100%; min-width: 0; border: 0; outline: 0; background: transparent;
+    color: var(--ink); font-size: 14px;
+  }
+  #searchInput::placeholder { color: #8b93a4; }
+  .clear {
+    display: none; border: 0; background: transparent; color: #8b93a4;
+    padding: 4px; cursor: pointer; font-size: 20px;
+  }
+  .share {
+    display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+    border: 1px solid var(--line); border-radius: 999px; background: #fff;
+    color: var(--ink); font-weight: 700; padding: 0 15px; min-height: 52px;
+    white-space: nowrap; cursor: pointer;
+  }
+  .share svg { width: 19px; height: 19px; }
+  .list { padding: 0 16px 24px; }
+  .result-count { font-size: 12px; color: var(--muted); margin: 0 4px 10px; min-height: 15px; }
+  .product {
+    display: flex; align-items: center; gap: 14px; width: 100%;
+    min-height: 122px; margin: 0 0 14px; padding: 12px;
+    border: 0; border-radius: 25px; background: var(--card);
+    color: inherit; text-align: left; text-decoration: none;
+    box-shadow: 0 2px 8px rgba(30, 51, 80, .025);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  /* 검색 결과에서 제외된 카드는 강제로 숨깁니다. */
+  .product[hidden] { display: none !important; }
+  .product:hover { box-shadow: 0 5px 16px rgba(30, 51, 80, .08); }
+  .product:active { transform: scale(.99); }
+  .product img {
+    width: 108px; height: 98px; flex: 0 0 108px; object-fit: cover;
+    border-radius: 17px; background: #e5ebf2;
+  }
+  .product-info { flex: 1; min-width: 0; }
+  .product-title {
+    font-size: 16px; line-height: 1.45; font-weight: 700;
+    letter-spacing: -.45px; overflow-wrap: anywhere;
+  }
+  .partner { font-weight: 500; }
+  .chevron { color: #7e8799; font-size: 28px; line-height: 1; padding: 0 3px; }
+  .empty {
+    display: none; text-align: center; color: var(--muted); padding: 36px 12px;
+    background: #fff; border-radius: 20px; font-size: 14px;
+  }
+  .footnote { color: #8a94a8; font-size: 11px; padding: 0 4px 16px; line-height: 1.6; }
+  .footnote span { font-size: 14px; margin-right: 5px; }
+  @media (max-width: 420px) {
+    .intro { padding: 21px 16px 17px; }
+    h1 { font-size: 25px; }
+    .list { padding: 0 12px 22px; }
+    .product { min-height: 105px; border-radius: 22px; gap: 12px; padding: 10px; }
+    .product img { width: 88px; height: 86px; flex-basis: 88px; border-radius: 14px; }
+    .product-title { font-size: 14px; }
+    .share { padding: 0 12px; font-size: 13px; }
+    #searchInput { font-size: 13px; }
+    .search-wrap { padding: 0 12px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ticker-track { animation: none; }
+    * { scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+  <div class="notice" aria-label="제휴 안내">
+    <div class="ticker-track">
+      <div class="ticker-group">📣 쿠팡, 트립닷컴, NOL, 여기어때 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.　좋은 콘텐츠로 보답할게요💕</div>
+      <div class="ticker-group" aria-hidden="true">📣 쿠팡, 트립닷컴, NOL, 여기어때 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.　좋은 콘텐츠로 보답할게요💕</div>
+    </div>
+  </div>
+
+  <section class="intro" aria-labelledby="pageTitle">
+    <div class="heading">
+      <span class="plane" aria-hidden="true">✈️</span>
+      <h1 id="pageTitle">추천 숙소</h1>
+    </div>
+    <div class="tools">
+      <label class="search-wrap">
+        <span class="search-icon" aria-hidden="true">⌕</span>
+        <input id="searchInput" type="search" placeholder="숙소를 검색해보세요 (예: 2-1, 카라반, 쿠팡)" autocomplete="off">
+        <button id="clearSearch" class="clear" type="button" aria-label="검색어 지우기">×</button>
+      </label>
+      <button class="share" id="shareButton" type="button" aria-label="페이지 공유">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7 15.3 6.3M8.7 13.3l6.6 4.4"></path>
+        </svg>
+        공유하기
+      </button>
+    </div>
+  </section>
+
+  <section class="list" aria-label="추천 숙소 목록">
+    <p class="result-count" id="resultCount" aria-live="polite"></p>
+
+    <!--
+      상품 등록/수정 방법:
+      1) data-number: 같은 상품명은 제휴처가 달라도 같은 번호 사용 (예: 2-1)
+      2) data-title: 검색에 사용할 상품명
+      3) data-partner: 제휴처명
+      4) href: 해당 상품의 실제 제휴 링크로 교체
+      5) img src: 실제 상품 이미지 주소로 교체
+      각 카드 전체를 누르면 해당 href로 이동합니다.
+    -->
+
+    <a class="product" href="https://www.coupang.com/" target="_blank" rel="sponsored noopener noreferrer"
+       data-number="2-1" data-title="호텔형 카라반" data-partner="쿠팡">
+      <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=360&q=80" alt="자연 속 숙소 예시" loading="lazy">
+      <span class="product-info"><span class="product-title">2-1. 호텔형 카라반 <span class="partner">(쿠팡)</span></span></span>
+      <span class="chevron" aria-hidden="true">›</span>
+    </a>
+
+    <a class="product" href="https://www.trip.com/" target="_blank" rel="sponsored noopener noreferrer"
+       data-number="2-1" data-title="호텔형 카라반" data-partner="트립닷컴">
+      <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=360&q=80" alt="바다 전망 숙소 예시" loading="lazy">
+      <span class="product-info"><span class="product-title">2-1. 호텔형 카라반 <span class="partner">(트립닷컴)</span></span></span>
+      <span class="chevron" aria-hidden="true">›</span>
+    </a>
+
+    <a class="product" href="https://www.nol.com/" target="_blank" rel="sponsored noopener noreferrer"
+       data-number="2-2" data-title="바다까지 가까운 숙소" data-partner="NOL">
+      <img src="https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&w=360&q=80" alt="여행 숙소 예시" loading="lazy">
+      <span class="product-info"><span class="product-title">2-2. 바다까지 가까운 숙소 <span class="partner">(NOL)</span></span></span>
+      <span class="chevron" aria-hidden="true">›</span>
+    </a>
+
+    <a class="product" href="https://www.goodchoice.kr/" target="_blank" rel="sponsored noopener noreferrer"
+       data-number="2-2" data-title="바다까지 가까운 숙소" data-partner="여기어때">
+      <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=360&q=80" alt="바다 전망 호텔 예시" loading="lazy">
+      <span class="product-info"><span class="product-title">2-2. 바다까지 가까운 숙소 <span class="partner">(여기어때)</span></span></span>
+      <span class="chevron" aria-hidden="true">›</span>
+    </a>
+
+    <a class="product" href="https://www.coupang.com/" target="_blank" rel="sponsored noopener noreferrer"
+       data-number="2-3" data-title="푹 쉬고 오는 숙소" data-partner="쿠팡">
+      <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=360&q=80" alt="호텔 수영장 예시" loading="lazy">
+      <span class="product-info"><span class="product-title">2-3. 푹 쉬고 오는 숙소 <span class="partner">(쿠팡)</span></span></span>
+      <span class="chevron" aria-hidden="true">›</span>
+    </a>
+
+    <a class="product" href="https://www.trip.com/" target="_blank" rel="sponsored noopener noreferrer"
+       data-number="2-4" data-title="감성 숙소 모음" data-partner="트립닷컴">
+      <img src="https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=360&q=80" alt="감성 숙소 예시" loading="lazy">
+      <span class="product-info"><span class="product-title">2-4. 감성 숙소 모음 <span class="partner">(트립닷컴)</span></span></span>
+      <span class="chevron" aria-hidden="true">›</span>
+    </a>
+
+    <div class="empty" id="emptyState">검색 결과가 없어요.<br>상품명, 번호 또는 제휴처를 다시 검색해 주세요.</div>
+    <p class="footnote"><span aria-hidden="true">ⓘ</span> 상품 이미지와 링크는 실제 등록할 제휴 상품 정보로 교체해 주세요.</p>
+  </section>
+</main>
+<script>
+  const searchInput = document.getElementById('searchInput');
+  const clearSearch = document.getElementById('clearSearch');
+  const cards = Array.from(document.querySelectorAll('.product'));
+  const resultCount = document.getElementById('resultCount');
+  const emptyState = document.getElementById('emptyState');
+
+  function normalize(value) {
+    return (value || '').toLocaleLowerCase('ko-KR').replace(/[^a-z0-9가-힣]/g, '');
+  }
+
+  function filterCards() {
+    const raw = searchInput.value.trim();
+    const query = normalize(raw);
+    let visible = 0;
+    cards.forEach(card => {
+      const searchable = normalize([
+        card.dataset.number,
+        card.dataset.title,
+        card.dataset.partner,
+        card.innerText
+      ].join(' '));
+      const match = !query || searchable.includes(query);
+      card.hidden = !match;
+      if (match) visible++;
+    });
+    clearSearch.style.display = raw ? 'block' : 'none';
+    resultCount.textContent = raw ? `${visible}개 상품` : '';
+    emptyState.style.display = visible ? 'none' : 'block';
+  }
+  searchInput.addEventListener('input', filterCards);
+  // 메인 페이지에서 전달된 검색어(예: ?q=2-1)를 자동으로 적용합니다.
+  const initialQuery = new URLSearchParams(window.location.search).get('q');
+  if (initialQuery) { searchInput.value = initialQuery; filterCards(); }
+  clearSearch.addEventListener('click', () => {
+    searchInput.value = '';
+    filterCards();
+    searchInput.focus();
+  });
+
+  document.getElementById('shareButton').addEventListener('click', async () => {
+    const shareData = { title: document.title, text: 'N픽 추천 숙소를 확인해 보세요.', url: location.href };
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(location.href);
+        alert('페이지 링크를 복사했어요.');
+      } else {
+        const temp = document.createElement('textarea');
+        temp.value = location.href;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand('copy');
+        temp.remove();
+        alert('페이지 링크를 복사했어요.');
+      }
+    } catch (error) {
+      if (error && error.name !== 'AbortError') alert('공유를 완료하지 못했어요. 다시 시도해 주세요.');
+    }
+  });
+  filterCards();
+</script>
+</body>
+</html>
