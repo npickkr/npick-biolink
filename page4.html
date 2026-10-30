@@ -124,6 +124,7 @@
     .ticker-track { animation: none; }
     * { scroll-behavior: auto !important; }
   }
+  .product-list { display: grid; gap: 12px; }
 </style>
 </head>
 <body>
@@ -143,7 +144,7 @@
     <div class="tools">
       <label class="search-wrap">
         <span class="search-icon" aria-hidden="true">⌕</span>
-        <input id="searchInput" type="search" placeholder="정보를 검색해보세요 (예: 1-1, 이사, 숙소)" autocomplete="off">
+        <input id="searchInput" type="search" placeholder="정보를 검색해보세요 (예: 1-1, 지원금, 신청)" autocomplete="off">
         <button id="clearSearch" class="clear" type="button" aria-label="검색어 지우기">×</button>
       </label>
       <button class="share" id="shareButton" type="button" aria-label="페이지 공유">
@@ -166,13 +167,36 @@
       4) 카드 전체를 누르면 해당 CPA 링크로 이동하도록 구성합니다.
       실제 링크가 제공되지 않아 예시 상품이나 가짜 링크는 표시하지 않습니다.
     -->
-    <div class="empty" id="emptyState">아직 등록된 정보가 없어요.<br>상품 링크를 등록하면 이곳에 표시됩니다.</div>
+    <div id="productList" class="product-list" aria-live="polite"></div>
+    <div class="empty" id="emptyState">아직 등록된 정보가 없어요.<br>CPA 링크를 등록하면 이곳에 표시됩니다.</div>
   </section>
 </main>
+<script src="product-data.js"></script>
 <script>
   const searchInput = document.getElementById('searchInput');
   const clearSearch = document.getElementById('clearSearch');
-  const cards = Array.from(document.querySelectorAll('.product'));
+  const productList = document.getElementById('productList');
+  const products = window.NPICK_PRODUCTS.page4Products;
+  function escapeHtml(value) {
+    return String(value ?? '').replace(/[&<>"']/g, char => ({
+      '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+    }[char]));
+  }
+  productList.innerHTML = products.map(product => {
+    const partner = product.partner ? ` <span class="partner">(${escapeHtml(product.partner)})</span>` : '';
+    const description = product.description ? `<div class="product-subtitle">${escapeHtml(product.description)}</div>` : '';
+    return `<a class="product" href="${escapeHtml(product.url || '#')}" target="_blank" rel="sponsored noopener noreferrer"
+      data-number="${escapeHtml(product.number)}" data-title="${escapeHtml(product.title)}"
+      data-partner="${escapeHtml(product.partner || '')}">
+      <img src="${escapeHtml(product.image || '')}" alt="${escapeHtml(product.alt || product.title)}" loading="lazy">
+      <div class="product-info">
+        <div class="product-title">${escapeHtml(product.number)} ${escapeHtml(product.title)}${partner}</div>
+        ${description}
+      </div>
+      <span class="chevron" aria-hidden="true">›</span>
+    </a>`;
+  }).join('');
+  const cards = Array.from(productList.querySelectorAll('.product'));
   const resultCount = document.getElementById('resultCount');
   const emptyState = document.getElementById('emptyState');
   const emptyDefaultText = '아직 등록된 정보가 없어요.<br>CPA 링크를 등록하면 이곳에 표시됩니다.';
@@ -211,7 +235,7 @@
   });
 
   document.getElementById('shareButton').addEventListener('click', async () => {
-    const shareData = { title: document.title, text: 'N픽 생활 속 유용한 정보를 확인해 보세요.', url: location.href };
+    const shareData = { title: document.title, text: 'N픽 답례품 고민 여기서 해결를 확인해 보세요.', url: location.href };
     try {
       if (navigator.share) {
         await navigator.share(shareData);

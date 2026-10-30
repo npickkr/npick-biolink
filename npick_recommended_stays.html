@@ -85,6 +85,7 @@
   .filter-chip[aria-pressed="true"] { background: #2868ed; border-color: #2868ed; color: #fff; font-weight: 700; }
   .list { padding: 0 16px 24px; }
   .result-count { font-size: 12px; color: var(--muted); margin: 0 4px 10px; min-height: 15px; }
+  .product-list { display: grid; gap: 12px; }
   .product {
     display: flex; align-items: center; gap: 14px; width: 100%;
     min-height: 122px; margin: 0 0 14px; padding: 12px;
@@ -188,66 +189,34 @@
   <section class="list" aria-label="추천 숙소 목록">
     <p class="result-count" id="resultCount" aria-live="polite"></p>
 
-    <!--
-      상품 등록/수정 방법:
-      1) data-number: 같은 상품명은 제휴처가 달라도 같은 번호 사용 (예: 2-1)
-      2) data-title: 검색에 사용할 상품명
-      3) data-partner: 제휴처명
-      4) href: 해당 상품의 실제 제휴 링크로 교체
-      5) img src: 실제 상품 이미지 주소로 교체
-      6) data-region / data-type: 실제 숙소 지역과 유형으로 변경
-      각 카드 전체를 누르면 해당 href로 이동합니다.
-    -->
-
-    <a class="product" href="https://www.coupang.com/" target="_blank" rel="sponsored noopener noreferrer"
-       data-number="2-1" data-title="호텔형 카라반" data-partner="쿠팡" data-region="강원" data-type="카라반">
-      <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=360&q=80" alt="자연 속 숙소 예시" loading="lazy">
-      <span class="product-info"><span class="product-title">2-1. 호텔형 카라반 <span class="partner">(쿠팡)</span></span></span>
-      <span class="chevron" aria-hidden="true">›</span>
-    </a>
-
-    <a class="product" href="https://www.trip.com/" target="_blank" rel="sponsored noopener noreferrer"
-       data-number="2-1" data-title="호텔형 카라반" data-partner="트립닷컴" data-region="강원" data-type="카라반">
-      <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=360&q=80" alt="바다 전망 숙소 예시" loading="lazy">
-      <span class="product-info"><span class="product-title">2-1. 호텔형 카라반 <span class="partner">(트립닷컴)</span></span></span>
-      <span class="chevron" aria-hidden="true">›</span>
-    </a>
-
-    <a class="product" href="https://www.nol.com/" target="_blank" rel="sponsored noopener noreferrer"
-       data-number="2-2" data-title="바다까지 가까운 숙소" data-partner="NOL" data-region="제주" data-type="호텔">
-      <img src="https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&w=360&q=80" alt="여행 숙소 예시" loading="lazy">
-      <span class="product-info"><span class="product-title">2-2. 바다까지 가까운 숙소 <span class="partner">(NOL)</span></span></span>
-      <span class="chevron" aria-hidden="true">›</span>
-    </a>
-
-    <a class="product" href="https://www.goodchoice.kr/" target="_blank" rel="sponsored noopener noreferrer"
-       data-number="2-2" data-title="바다까지 가까운 숙소" data-partner="여기어때" data-region="제주" data-type="호텔">
-      <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=360&q=80" alt="바다 전망 호텔 예시" loading="lazy">
-      <span class="product-info"><span class="product-title">2-2. 바다까지 가까운 숙소 <span class="partner">(여기어때)</span></span></span>
-      <span class="chevron" aria-hidden="true">›</span>
-    </a>
-
-    <a class="product" href="https://www.coupang.com/" target="_blank" rel="sponsored noopener noreferrer"
-       data-number="2-3" data-title="푹 쉬고 오는 숙소" data-partner="쿠팡" data-region="서울·경기" data-type="리조트">
-      <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=360&q=80" alt="호텔 수영장 예시" loading="lazy">
-      <span class="product-info"><span class="product-title">2-3. 푹 쉬고 오는 숙소 <span class="partner">(쿠팡)</span></span></span>
-      <span class="chevron" aria-hidden="true">›</span>
-    </a>
-
-    <a class="product" href="https://www.trip.com/" target="_blank" rel="sponsored noopener noreferrer"
-       data-number="2-4" data-title="감성 숙소 모음" data-partner="트립닷컴" data-region="해외" data-type="호텔">
-      <img src="https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=360&q=80" alt="감성 숙소 예시" loading="lazy">
-      <span class="product-info"><span class="product-title">2-4. 감성 숙소 모음 <span class="partner">(트립닷컴)</span></span></span>
-      <span class="chevron" aria-hidden="true">›</span>
-    </a>
+    <div id="productList" class="product-list" aria-live="polite"></div>
 
     <div class="empty" id="emptyState">검색 결과가 없어요.<br>상품명, 번호 또는 제휴처를 다시 검색해 주세요.</div>
     <p class="footnote"><span aria-hidden="true">ⓘ</span> 현재 지역·유형 표시는 예시입니다. 실제 숙소를 등록할 때 지역과 유형, 이미지와 링크를 해당 정보로 바꿔 주세요.</p>
   </section>
 </main>
+<script src="product-data.js"></script>
 <script>
   const searchInput = document.getElementById('searchInput');
   const clearSearch = document.getElementById('clearSearch');
+  const productList = document.getElementById('productList');
+  const stayProducts = window.NPICK_PRODUCTS.stayProducts;
+  function escapeHtml(value) {
+    return String(value ?? '').replace(/[&<>"']/g, char => ({
+      '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+    }[char]));
+  }
+  productList.innerHTML = stayProducts.map(product => {
+    const partner = product.partner ? ` <span class="partner">(${escapeHtml(product.partner)})</span>` : '';
+    return `<a class="product" href="${escapeHtml(product.url || '#')}" target="_blank" rel="sponsored noopener noreferrer"
+      data-number="${escapeHtml(product.number)}" data-title="${escapeHtml(product.title)}"
+      data-partner="${escapeHtml(product.partner || '')}" data-region="${escapeHtml(product.region || '')}"
+      data-type="${escapeHtml(product.type || '')}">
+      <img src="${escapeHtml(product.image || '')}" alt="${escapeHtml(product.alt || product.title)}" loading="lazy">
+      <span class="product-info"><span class="product-title">${escapeHtml(product.number)}. ${escapeHtml(product.title)}${partner}</span></span>
+      <span class="chevron" aria-hidden="true">›</span>
+    </a>`;
+  }).join('');
   const cards = Array.from(document.querySelectorAll('.product'));
   const resultCount = document.getElementById('resultCount');
   const emptyState = document.getElementById('emptyState');
