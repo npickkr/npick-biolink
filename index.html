@@ -56,6 +56,7 @@ a{color:inherit;text-decoration:none}.page{width:min(100%,540px);min-height:100v
     </a>
   </section>
   <div class="empty" id="emptyMessage">검색 결과가 없습니다.</div>
+  <p id="productDataMessage" role="status" hidden style="margin:12px 4px;color:#7f8da1;font-size:12px;line-height:1.5">상품 데이터를 불러오지 못했습니다. 같은 폴더의 product-data.js 파일과 window.NPICK_PRODUCTS.allProducts 설정을 확인해 주세요.</p>
   <footer class="footer">
     <nav class="socials" aria-label="SNS 링크">
       <a class="social youtube" href="https://www.youtube.com/@npick_official" target="_blank" rel="noopener noreferrer" aria-label="유튜브"><span class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z"/></svg></span><span>유튜브</span></a>
@@ -65,28 +66,23 @@ a{color:inherit;text-decoration:none}.page{width:min(100%,540px);min-height:100v
   </footer>
 </main>
 
+<!-- product-data.js에서 window.NPICK_PRODUCTS.allProducts를 먼저 설정합니다. -->
+<script src="./product-data.js"></script>
 <script>
-// 외부 product-data.js가 없을 경우를 대비한 기본 샘플 데이터 선언
-window.NPICK_PRODUCTS = window.NPICK_PRODUCTS || {
-  allProducts: [
-    { number: '1-1', title: '생활 유용 정보 세부 서비스', partner: 'N픽', url: 'page1.html', image: 'info.jpg', alt: '정보 이미지', description: '생활 속 꼭 필요한 혜택 모음' },
-    { number: '2-1', title: '호텔형 카라반 숙소', partner: '쿠팡', url: 'npick_recommended_stays.html', image: 'hotel.jpg', alt: '숙소 이미지', description: '자연 속 힐링 카라반' },
-    { number: '3-1', title: '어린이집 입소 필수 준비물', partner: 'N픽', url: 'page3.html', image: 'childcare.jpg', alt: '준비물 이미지', description: '새학기 준비물 체크리스트' },
-    { number: '4-1', title: '감사 답례품 세트', partner: 'N픽', url: 'page4.html', image: 'gift.jpg', alt: '답례품 이미지', description: '정성스런 답례 선물' },
-    { number: '5-1', title: '명절 및 부모님 선물', partner: 'N픽', url: 'page5.html', image: 'holiday-gift.jpg', alt: '선물 이미지', description: '마음을 전하는 선물 모음' }
-  ]
-};
-
 const searchInput = document.getElementById('searchInput');
 const cards = [...document.querySelectorAll('#cards .card')];
 const emptyMessage = document.getElementById('emptyMessage');
 const productSearchResults = document.getElementById('productSearchResults');
 const sectionTitle = document.getElementById('sectionTitle');
-const allProducts = window.NPICK_PRODUCTS.allProducts || [];
+const productDataMessage = document.getElementById('productDataMessage');
+const hasProductData = Array.isArray(window.NPICK_PRODUCTS?.allProducts);
+const allProducts = hasProductData
+  ? window.NPICK_PRODUCTS.allProducts.filter(product => product && typeof product === 'object')
+  : [];
 
 // 정규화 함수: 하이픈(-)과 숫자, 한글, 영문을 보존하도록 수정
 function normalizeSearch(value) {
-  return (value || '').toLowerCase().replace(/[^a-z0-9가-힣\-]/g, '');
+  return String(value ?? '').toLowerCase().replace(/[^a-z0-9가-힣\-]/g, '');
 }
 
 function renderProductResults(products) {
@@ -96,7 +92,7 @@ function renderProductResults(products) {
     link.className = 'card'; link.href = product.url; link.target = '_blank'; link.rel = 'sponsored noopener noreferrer';
     const img = document.createElement('img'); img.className = 'thumb'; img.src = product.image; img.alt = product.alt || ''; img.loading = 'lazy';
     const copy = document.createElement('div'); copy.className = 'card-copy';
-    const title = document.createElement('div'); title.className = 'card-title'; title.textContent = product.number + ' ' + product.title + (product.partner ? ' (' + product.partner + ')' : '');
+    const title = document.createElement('div'); title.className = 'card-title'; title.textContent = [product.number, product.title].filter(value => value != null && value !== '').join(' ') + (product.partner ? ' (' + product.partner + ')' : '');
     if (product.description) {
       const desc = document.createElement('div'); desc.className = 'card-desc'; desc.textContent = product.description; copy.append(title, desc);
     } else {
@@ -111,18 +107,26 @@ function renderProductResults(products) {
 function updateSearch() {
   const raw = searchInput.value.trim();
   const q = normalizeSearch(raw);
+  productDataMessage.hidden = !raw || hasProductData;
 
   // 1, 2, 3... 카드 번호 검색 처리
   const categoryMatch = raw.match(/^(\d+)-?$/);
   const categoryNumber = categoryMatch ? categoryMatch[1] : '';
 
   // 상품 매칭 (1-1, 2-1 등 특정 상품번호 또는 검색어 매칭)
-  const matchedProducts = raw
+  const matchedProducts = q
     ? allProducts.filter(product => {
         const prodNum = normalizeSearch(product.number);
         const prodTitle = normalizeSearch(product.title);
         const prodPartner = normalizeSearch(product.partner);
-        return prodNum.includes(q) || prodTitle.includes(q) || prodPartner.includes(q);
+        if (categoryNumber) {
+          return prodNum.split('-')[0] === categoryNumber;
+        }
+        if (/^\d+-\d+$/.test(raw)) {
+          return prodNum === q;
+        }
+        return prodNum.includes(q) || prodTitle.includes(q) || prodPartner.includes(q)
+          || normalizeSearch(product.description).includes(q);
       })
     : [];
 
@@ -145,17 +149,17 @@ function updateSearch() {
         : href.includes('page3') ? '3'
         : href.includes('page4') ? '4'
         : href.includes('page5') ? '5' : '';
-      match = categoryByHref === categoryNumber || searchable.includes(q);
+      match = categoryByHref === categoryNumber;
     } else {
       // 상품 검색 결과가 없는 일반 단어 검색 시 카테고리 카드 매칭
-      match = !isProductSearch && searchable.includes(q);
+      match = !!q && !isProductSearch && searchable.includes(q);
     }
 
     card.style.display = match ? 'flex' : 'none';
     if (match) shown++;
   });
 
-  sectionTitle.style.display = (isProductSearch || (categoryNumber && !shown)) ? 'none' : 'flex';
+  sectionTitle.style.display = (isProductSearch || !shown) ? 'none' : 'flex';
   emptyMessage.style.display = (shown || matchedProducts.length) ? 'none' : 'block';
 }
 
@@ -168,7 +172,25 @@ if (initialQuery) {
   updateSearch();
 }
 
-// 공유하기 기능 (Web Share API 및 클립보드 복사 Fallback 보장)
+// 공유하기: Web Share API가 없으면 주소를 복사합니다.
 document.getElementById('shareButton').addEventListener('click', async () => {
-  const shareData = {
-    title: document.title
+  const shareData = { title: document.title, url: window.location.href };
+  if (navigator.share) {
+    try {
+      await navigator.share(shareData);
+      return;
+    } catch (error) {
+      if (error.name === 'AbortError') return;
+    }
+  }
+  try {
+    if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
+    await navigator.clipboard.writeText(shareData.url);
+    window.alert('페이지 주소를 복사했습니다.');
+  } catch {
+    window.prompt('아래 페이지 주소를 복사해 주세요.', shareData.url);
+  }
+});
+</script>
+</body>
+</html>
