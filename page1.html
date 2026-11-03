@@ -131,6 +131,39 @@
     * { scroll-behavior: auto !important; }
   }
   .product-list { display: grid; gap: 12px; }
+
+/* N픽 공통 SNS 하단 영역 */
+.sns-footer{margin-top:22px;padding:15px 0 8px;border-top:1px solid #eef1f6;text-align:center;}
+.sns-footer .footer-label{font-size:10px;color:#8794a7;margin-bottom:10px;}
+.socials{display:flex;justify-content:center;gap:27px}.social{display:flex;flex-direction:column;align-items:center;gap:4px;color:#65758a;font-size:9px}.social-icon{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:#f4f6f9;border:1px solid #e8edf3}.social svg{width:16px;height:16px}.social.youtube .social-icon{color:#e62117}.social.instagram .social-icon{color:#c13584}.social.tiktok .social-icon{color:#111111}
+@media(max-width:380px){.sns-footer .socials{gap:22px;}}
+
+/* SNS footer 표시 및 배치 보정 */
+.page .sns-footer {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  clear: both;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 22px !important;
+  padding: 15px 0 8px !important;
+  border-top: 1px solid #eef1f6;
+  text-align: center;
+  z-index: 2;
+}
+.page .sns-footer .socials {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+.page .sns-footer .social {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
 </style>
 </head>
 <body>
@@ -164,25 +197,28 @@
 
   <section class="list" aria-label="생활 속 유용한 정보 목록">
     <p class="result-count" id="resultCount" aria-live="polite"></p>
-
+    
     <div id="productList" class="product-list" aria-live="polite"></div>
     <div class="empty" id="emptyState">검색 결과가 없어요.<br>번호 또는 정보 제목을 다시 검색해 주세요.</div>
   </section>
+
+<footer class="footer sns-footer" aria-label="N픽 공식 SNS">
+  <div class="footer-label">N픽 공식 SNS</div>
+  <nav class="socials" aria-label="SNS 링크">
+      <a class="social youtube" href="https://www.youtube.com/@npick_official" target="_blank" rel="noopener noreferrer" aria-label="유튜브"><span class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z"/></svg></span><span>유튜브</span></a>
+      <!-- 인스타그램 주소를 실제 N픽 계정 주소로 바꿔주세요. -->
+      <a class="social instagram" href="https://www.instagram.com/npick.kr/" target="_blank" rel="noopener noreferrer" aria-label="인스타그램"><span class="social-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg></span><span>인스타그램</span></a>
+      <!-- N픽 틱톡 계정 -->
+      <a class="social tiktok" href="https://www.tiktok.com/@npick.kr" target="_blank" rel="noopener noreferrer" aria-label="틱톡"><span class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.6 7.1a6.7 6.7 0 0 1-4.1-1.4v8.1a6.1 6.1 0 1 1-5.3-6.1v3.2a2.9 2.9 0 1 0 2.1 2.8V2.5h3.2c.2 1.8 1.5 3.4 3.3 3.8.3.1.5.1.8.1v.7Z"/></svg></span><span>틱톡</span></a>
+    </nav>
+</footer>
 </main>
 <script src="product-data.js"></script>
 <script>
   const searchInput = document.getElementById('searchInput');
   const clearSearch = document.getElementById('clearSearch');
   const productList = document.getElementById('productList');
-  // 상품 번호와 링크가 같은 데이터는 한 번만 표시해 중복 노출을 방지합니다.
-  const sourceProducts = window.NPICK_PRODUCTS.page1Products || [];
-  const seenProducts = new Set();
-  const products = sourceProducts.filter(product => {
-    const key = `${String(product.number || '').trim()}|${String(product.url || '').trim()}`;
-    if (seenProducts.has(key)) return false;
-    seenProducts.add(key);
-    return true;
-  });
+  const products = Array.isArray(window.NPICK_PRODUCTS?.page1Products) ? window.NPICK_PRODUCTS.page1Products : [];
   function escapeHtml(value) {
     return String(value ?? '').replace(/[&<>"']/g, char => ({
       '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
@@ -263,5 +299,6 @@
   });
   filterCards();
 </script>
+
 </body>
 </html>
