@@ -201,7 +201,7 @@
       실제 링크가 제공되지 않아 예시 상품이나 가짜 링크는 표시하지 않습니다.
     -->
     <div id="productList" class="product-list" aria-live="polite"></div>
-    <div class="empty" id="emptyState">아직 등록된 정보가 없어요.<br>CPA 링크를 등록하면 이곳에 표시됩니다.</div>
+    <div class="empty" id="emptyState">아직 등록된 정보가 없어요.<br></div>
   </section>
 
 <footer class="footer sns-footer" aria-label="N픽 공식 SNS">
@@ -243,7 +243,7 @@
   const cards = Array.from(productList.querySelectorAll('.product'));
   const resultCount = document.getElementById('resultCount');
   const emptyState = document.getElementById('emptyState');
-  const emptyDefaultText = '아직 등록된 정보가 없어요.<br>CPA 링크를 등록하면 이곳에 표시됩니다.';
+  const emptyDefaultText = '아직 등록된 정보가 없어요.<br>';
 
   function normalize(value) {
     return (value || '').toLocaleLowerCase('ko-KR').replace(/[^a-z0-9가-힣]/g, '');
