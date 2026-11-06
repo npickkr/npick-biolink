@@ -213,12 +213,14 @@
     </nav>
 </footer>
 </main>
-<script src="product-data.js"></script>
+<script src="./product-data.js"></script>
 <script>
   const searchInput = document.getElementById('searchInput');
   const clearSearch = document.getElementById('clearSearch');
   const productList = document.getElementById('productList');
-  const products = Array.isArray(window.NPICK_PRODUCTS?.page1Products) ? window.NPICK_PRODUCTS.page1Products : [];
+  const selectedProducts = window.NPICK_PRODUCTS?.page1Products;
+  const dataLoaded = Array.isArray(selectedProducts);
+  const products = dataLoaded ? selectedProducts : [];
   function escapeHtml(value) {
     return String(value ?? '').replace(/[&<>"']/g, char => ({
       '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
@@ -264,7 +266,7 @@
     clearSearch.style.display = raw ? 'block' : 'none';
     resultCount.textContent = raw ? `${visible}개 상품` : '';
     emptyState.style.display = visible ? 'none' : 'block';
-    emptyState.innerHTML = raw ? '검색 결과가 없어요.<br>번호 또는 정보 제목을 다시 검색해 주세요.' : emptyDefaultText;
+    emptyState.innerHTML = !dataLoaded ? '상품 데이터 파일을 불러오지 못했어요. product-data.js가 이 HTML과 같은 폴더에 있는지 확인해 주세요.' : !products.length ? '아직 등록된 상품이 없어요. product-data.js의 page1Products 목록을 확인해 주세요.' : raw ? '검색 결과가 없어요.<br>번호 또는 정보 제목을 다시 검색해 주세요.' : emptyDefaultText;
   }
   searchInput.addEventListener('input', filterCards);
   // 메인 페이지에서 전달된 검색어(예: ?q=2-1)를 자동으로 적용합니다.
