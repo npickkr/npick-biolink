@@ -4,11 +4,11 @@
 const page1Products = [];
 const stayProducts = [];
 const page3Products = [
-  {number:'1-1', title:'자수 고리수건', partner:'네이버', image:'https://images.unsplash.com/photo-1583947215259-38e31be8751f?auto=format&fit=crop&w=360&q=80', alt:'자수 고리수건', url:'https://naver.me/xIF6jEM4'},
-  {number:'1-2', title:'자수 고리수건', partner:'쿠팡', image:'https://images.unsplash.com/photo-1583947215259-38e31be8751f?auto=format&fit=crop&w=360&q=80', alt:'자수 고리수건', url:'https://link.coupang.com/a/ikBlFKE9MO'},
-  {number:'2-1', title:'수저세트', partner:'네이버', image:'https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?auto=format&fit=crop&w=360&q=80', alt:'수저세트', url:'https://naver.me/5homGEN7'},
+  {number:'1-1', title:'자수 고리수건', partner:'네이버', image:'https://shop-phinf.pstatic.net/20230913_77/16945929539670DCgm_JPEG/482645781927174_1446721162.jpg?type=o1000', alt:'자수 고리수건', url:'https://naver.me/xIF6jEM4'},
+  {number:'1-2', title:'자수 고리수건', partner:'쿠팡', image:'https://thumbnail.coupangcdn.com/thumbnails/remote/640x640ex/image/vendor_inventory/359a/859364fa202d99d0b6c85629e56b3189c2b15d8b0e7e15a0a1b3baaaee9e.jpg', alt:'자수 고리수건', url:'https://link.coupang.com/a/ikBlFKE9MO'},
+  {number:'2-1', title:'수저세트', partner:'네이버', image:'https://shop-phinf.pstatic.net/20230810_127/1691636109905bdT5x_JPEG/6311699274608708_834464112.jpg?type=o1000', alt:'수저세트', url:'https://naver.me/5homGEN7'},
   {number:'2-2', title:'수저세트', partner:'쿠팡', image:'https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?auto=format&fit=crop&w=360&q=80', alt:'수저세트', url:'https://link.coupang.com/a/ikBB2ulige'},
-  {number:'2-3', title:'수저세트', partner:'네이버', image:'https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?auto=format&fit=crop&w=360&q=80', alt:'수저세트', url:'https://naver.me/xnO2xnrl'},
+  {number:'2-3', title:'수저세트', partner:'네이버', image:'C:\Users\vlfwj\OneDrive\바탕 화면\새학기 준비물\어린이집 상품사진\04_수저세트_02.jpg', alt:'수저세트', url:'https://naver.me/xnO2xnrl'},
   {number:'3-1', title:'원터치 빨대컵', partner:'네이버', image:'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=360&q=80', alt:'원터치 빨대컵', url:'https://naver.me/x3c45m3k'},
   {number:'3-2', title:'자기주도 빨대컵', partner:'네이버', image:'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=360&q=80', alt:'자기주도 빨대컵', url:'https://naver.me/FTdvFXfV'},
   {number:'3-3', title:'각인 텀블러', partner:'쿠팡', image:'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&w=360&q=80', alt:'각인 텀블러', url:'https://link.coupang.com/a/ikBSNSAri8'},
