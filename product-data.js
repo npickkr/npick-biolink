@@ -46,7 +46,7 @@ const page3Products = [
   {number:'16-2', title:'미용 각티슈', partner:'쿠팡', image:'https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&w=360&q=80', alt:'미용 각티슈', url:'https://link.coupang.com/a/ikDm9Hlt2i'},
   {number:'17-1', title:'두루마리 화장지', partner:'네이버', image:'https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&w=360&q=80', alt:'두루마리 화장지', url:'https://naver.me/5p0mxDlU'},
   {number:'17-2', title:'천연펄프 무형광 두루마리', partner:'쿠팡', image:'https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&w=360&q=80', alt:'천연펄프 무형광 두루마리', url:'https://link.coupang.com/a/ikDrUBsjF6'},
-  {number:'18-1', title:'무향 손세정제', partner:'네이버', image:'https://images.unsplash.com/photo-1584308666744-24d5c474f2-ae?auto=format&fit=crop&w=360&q=80', alt:'무향 손세정제', url:'https://naver.me/GP2CxyH9'},
+  {number:'18-1', title:'무향 손세정제', partner:'네이버', image:'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=360&q=80', alt:'무향 손세정제', url:'https://naver.me/GP2CxyH9'},
   {number:'18-2', title:'베이비파우더향 손세정제', partner:'쿠팡', image:'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=360&q=80', alt:'베이비파우더향 손세정제', url:'https://link.coupang.com/a/ikDxawGRJ6'},
 ];
 const page4Products = [];
