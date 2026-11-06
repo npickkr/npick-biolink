@@ -4,14 +4,14 @@
 const page1Products = [];
 const stayProducts = [];
 const page3Products = [
-  {number:'3-1', title:'자수 고리수건', partner:'네이버', image:'https://shop-phinf.pstatic.net/20230913_77/16945929539670DCgm_JPEG/482645781927174_1446721162.jpg?type=o1000', alt:'자수 고리수건', url:'https://naver.me/xIF6jEM4'},
-  {number:'3-1', title:'자수 고리수건', partner:'쿠팡', image:'https://thumbnail.coupangcdn.com/thumbnails/remote/640x640ex/image/vendor_inventory/359a/859364fa202d99d0b6c85629e56b3189c2b15d8b0e7e15a0a1b3baaaee9e.jpg', alt:'자수 고리수건', url:'https://link.coupang.com/a/ikBlFKE9MO'},
-  {number:'3-2', title:'수저세트', partner:'네이버', image:'https://shop-phinf.pstatic.net/20230810_127/1691636109905bdT5x_JPEG/6311699274608708_834464112.jpg?type=o1000', alt:'수저세트', url:'https://naver.me/5homGEN7'},
-  {number:'3-2', title:'수저세트', partner:'쿠팡', image:'https://thumbnail.coupangcdn.com/thumbnails/remote/640x640ex/image/retail/images/245252339268116-94f37ace-a4b5-4470-9632-260156260cb7.jpg', alt:'수저세트', url:'https://link.coupang.com/a/ikBB2ulige'},
-  {number:'3-2', title:'수저세트', partner:'네이버', image:'https://shop-phinf.pstatic.net/20260428_38/1777355570148iun14_PNG/111488502361802826_201557400.png?type=o1000', url:'https://naver.me/xnO2xnrl'},
-  {number:'3-3', title:'원터치 빨대컵', partner:'네이버', image:'https://shop-phinf.pstatic.net/20241024_268/1729730269491Fv4De_JPEG/63863070637344641_732763098.jpg?type=o1000', alt:'원터치 빨대컵', url:'https://naver.me/x3c45m3k'},
-  {number:'3-3', title:'자기주도 빨대컵', partner:'네이버', image:'https://shop-phinf.pstatic.net/20250926_137/1758871951642Gmxce_JPEG/9237312757582490_405572934.jpg?type=o1000', alt:'자기주도 빨대컵', url:'https://naver.me/FTdvFXfV'},
-  {number:'3-3', title:'각인 텀블러', partner:'쿠팡', image:'https://thumbnail.coupangcdn.com/thumbnails/remote/640x640ex/image/retail/images/55247949256016-e8b72f7b-1a8c-4228-9bd3-f3a7234043ef.jpg', alt:'각인 텀블러', url:'https://link.coupang.com/a/ikBSNSAri8'},
+  {number:'3-1', title:'자수 고리수건', partner:'네이버', image:'./images/수건1.jpg', alt:'자수 고리수건', url:'https://naver.me/xIF6jEM4'},
+  {number:'3-1', title:'자수 고리수건', partner:'쿠팡', image:'./images/수건2.jpg', alt:'자수 고리수건', url:'https://link.coupang.com/a/ikBlFKE9MO'},
+  {number:'3-2', title:'수저세트', partner:'네이버', image:'./images/수저1.jpg', alt:'수저세트', url:'https://naver.me/5homGEN7'},
+  {number:'3-2', title:'수저세트', partner:'쿠팡', image:'./images/수저2.jpg', alt:'수저세트', url:'https://link.coupang.com/a/ikBB2ulige'},
+  {number:'3-2', title:'수저세트', partner:'네이버', image:'./images/수저3.jpg', url:'https://naver.me/xnO2xnrl'},
+  {number:'3-3', title:'원터치 빨대컵', partner:'네이버', image:'./images/물컵1.jpg', alt:'원터치 빨대컵', url:'https://naver.me/x3c45m3k'},
+  {number:'3-3', title:'자기주도 빨대컵', partner:'네이버', image:'./images/물컵2.jpg', alt:'자기주도 빨대컵', url:'https://naver.me/FTdvFXfV'},
+  {number:'3-3', title:'각인 텀블러', partner:'쿠팡', image:'./images/물컵3.jpg', alt:'각인 텀블러', url:'https://link.coupang.com/a/ikBSNSAri8'},
   {number:'3-4', title:'네임 칫솔(24개월~)', partner:'네이버', image:'https://shop-phinf.pstatic.net/20241105_17/1730802949571Ne2Wt_JPEG/7016129467541327_1091275545.jpg?type=o1000', alt:'네임 칫솔(24개월~)', url:'https://naver.me/FfsnbB4h'},
   {number:'3-4', title:'치과 칫솔', partner:'쿠팡', image:'https://thumbnail.coupangcdn.com/thumbnails/remote/640x640ex/image/vendor_inventory/d59f/0ff2312d302bbdc58527282542c1125c5d97e697fe375b9141aea50c465e.jpg', alt:'치과 칫솔', url:'https://link.coupang.com/a/ikB7feyygm'},
   {number:'3-5', title:'무불소 치약', partner:'네이버', image:'https://shop-phinf.pstatic.net/20250415_275/1744693810422j9SPD_JPEG/78826657566912598_1551046570.jpg?type=o1000', alt:'무불소 치약', url:'https://naver.me/5Jq5KqHa'},
