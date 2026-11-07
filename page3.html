@@ -80,17 +80,21 @@
   .share svg { width: 19px; height: 19px; }
   .list { padding: 0 16px 24px; }
   .result-count { font-size: 12px; color: var(--muted); margin: 0 4px 10px; min-height: 15px; }
+  
+  /* 💡 카드 배경색 제거 및 하단 구분선 스타일 적용 */
   .product {
     display: flex; align-items: center; gap: 14px; width: 100%;
-    min-height: 122px; margin: 0 0 14px; padding: 12px;
-    border: 0; border-radius: 25px; background: var(--card);
+    min-height: 110px; margin: 0; padding: 12px 4px;
+    border: 0; border-radius: 0; background: transparent;
     color: inherit; text-align: left; text-decoration: none;
-    box-shadow: 0 2px 8px rgba(30, 51, 80, .025);
-    transition: transform .15s ease, box-shadow .15s ease;
+    box-shadow: none;
+    border-bottom: 1px solid var(--line);
+    transition: background .15s ease;
   }
   .product[hidden] { display: none !important; }
-  .product:hover { box-shadow: 0 5px 16px rgba(30, 51, 80, .08); }
+  .product:hover { background: rgba(255, 255, 255, 0.4); box-shadow: none; }
   .product:active { transform: scale(.99); }
+  
   .product img {
     width: 108px; height: 98px; flex: 0 0 108px; object-fit: cover;
     border-radius: 17px; background: #e5ebf2;
@@ -98,7 +102,7 @@
   .product-info { flex: 1; min-width: 0; }
   .product-title {
     font-size: 16px; line-height: 1.45; font-weight: 700;
-    letter-spacing: -.45px; overflow-wrap: anywhere;
+    letter-spacing: -0.45px; overflow-wrap: anywhere;
   }
   .partner { font-weight: 500; }
   
@@ -112,16 +116,17 @@
     overflow-wrap: anywhere;
   }
 
+  .product-subtitle { font-size: 11px; color: var(--muted); margin-top: 3px; }
   .chevron { color: #7e8799; font-size: 28px; line-height: 1; padding: 0 3px; }
   .empty {
     display: none; text-align: center; color: var(--muted); padding: 36px 12px;
-    background: #fff; border-radius: 20px; font-size: 14px;
+    background: #fff; border-radius: 20px; font-size: 14px; margin-top: 15px;
   }
   @media (max-width: 420px) {
     .intro { padding: 21px 16px 17px; }
     h1 { font-size: 25px; }
     .list { padding: 0 12px 22px; }
-    .product { min-height: 105px; border-radius: 22px; gap: 12px; padding: 10px; }
+    .product { min-height: 95px; padding: 10px 4px; gap: 12px; }
     .product img { width: 88px; height: 86px; flex-basis: 88px; border-radius: 14px; }
     .product-title { font-size: 14px; }
     .share { padding: 0 12px; font-size: 13px; }
@@ -132,7 +137,7 @@
     .ticker-track { animation: none; }
     * { scroll-behavior: auto !important; }
   }
-  .product-list { display: grid; gap: 12px; }
+  .product-list { display: grid; gap: 0; }
 
 .sns-footer{margin-top:22px;padding:15px 0 8px;border-top:1px solid #eef1f6;text-align:center;}
 .sns-footer .footer-label{font-size:10px;color:#8794a7;margin-bottom:10px;}
@@ -220,3 +225,90 @@
 
   function escapeHtml(value) {
     return String(value ?? '').replace(/[&<>"']/g, char => ({
+      '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+    }[char]));
+  }
+
+  productList.innerHTML = products.map(product => {
+    const partner = product.partner ? ` <span class="partner">(${escapeHtml(product.partner)})</span>` : '';
+    const guideHtml = product.guide ? `<div class="product-guide">${escapeHtml(product.guide)}</div>` : '';
+    const description = product.description ? `<div class="product-subtitle">${escapeHtml(product.description)}</div>` : '';
+    const downloadAttr = product.isDownload ? ' download' : '';
+
+    return `<a class="product" href="${escapeHtml(product.url || '#')}" target="_blank" rel="sponsored noopener noreferrer"${downloadAttr}
+      data-number="${escapeHtml(product.number)}" data-title="${escapeHtml(product.title)}"
+      data-partner="${escapeHtml(product.partner || '')}" data-guide="${escapeHtml(product.guide || '')}">
+      <img src="${escapeHtml(product.image || '')}" alt="${escapeHtml(product.alt || product.title)}" loading="lazy">
+      <div class="product-info">
+        <div class="product-title">${escapeHtml(product.number)} ${escapeHtml(product.title)}${partner}</div>
+        ${guideHtml}
+        ${description}
+      </div>
+      <span class="chevron" aria-hidden="true">›</span>
+    </a>`;
+  }).join('');
+
+  const cards = Array.from(productList.querySelectorAll('.product'));
+  const resultCount = document.getElementById('resultCount');
+  const emptyState = document.getElementById('emptyState');
+  const emptyDefaultText = '아직 등록된 정보가 없어요.<br>';
+
+  function normalize(value) {
+    return (value || '').toLocaleLowerCase('ko-KR').replace(/[^a-z0-9가-힣]/g, '');
+  }
+
+  function filterCards() {
+    const raw = searchInput.value.trim();
+    const query = normalize(raw);
+    let visible = 0;
+    cards.forEach(card => {
+      const searchable = normalize([
+        card.dataset.number,
+        card.dataset.title,
+        card.dataset.guide,
+        card.innerText
+      ].join(' '));
+      const match = !query || searchable.includes(query);
+      card.hidden = !match;
+      if (match) visible++;
+    });
+    clearSearch.style.display = raw ? 'block' : 'none';
+    resultCount.textContent = raw ? `${visible}개 상품` : '';
+    emptyState.style.display = visible ? 'none' : 'block';
+    emptyState.innerHTML = !dataLoaded ? '상품 데이터 파일을 불러오지 못했어요. product-data.js가 이 HTML과 같은 폴더에 있는지 확인해 주세요.' : !products.length ? '아직 등록된 상품이 없어요. product-data.js의 page3Products 목록에 상품을 추가해 주세요.' : raw ? '검색 결과가 없어요.<br>번호 또는 정보 제목을 다시 검색해 주세요.' : emptyDefaultText;
+  }
+
+  searchInput.addEventListener('input', filterCards);
+  const initialQuery = new URLSearchParams(window.location.search).get('q');
+  if (initialQuery) searchInput.value = initialQuery;
+  clearSearch.addEventListener('click', () => {
+    searchInput.value = '';
+    filterCards();
+    searchInput.focus();
+  });
+
+  document.getElementById('shareButton').addEventListener('click', async () => {
+    const shareData = { title: document.title, text: 'N픽 어린이집·유치원 첫 입소 & 새학기 준비물 리스트를 확인해 보세요.', url: location.href };
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(location.href);
+        alert('페이지 링크를 복사했어요.');
+      } else {
+        const temp = document.createElement('textarea');
+        temp.value = location.href;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand('copy');
+        temp.remove();
+        alert('페이지 링크를 복사했어요.');
+      }
+    } catch (error) {
+      if (error && error.name !== 'AbortError') alert('공유를 완료하지 못했어요. 다시 시도해 주세요.');
+    }
+  });
+  filterCards();
+</script>
+</body>
+</html>
