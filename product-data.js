@@ -1,14 +1,16 @@
 /* N픽 공통 상품 데이터
    페이지 1~5의 상품 추가/수정은 이 파일 한 곳에서만 진행합니다.
 */
-const page1Products = [];
+const page1Products = [
+  { number: '1-1', title: '이사 무료 방문견적 & 패키지 혜택', image: './images/모두이사.jpg', alt: '이사 무료 방문견적', url: 'https://dbdbdeep.com/ma/link.php?lncd=S00280362TC06046818R' }
+];
 const stayProducts = [];
 
 const page3Products = [
   // 상단 필수 사이트 및 PDF 안내 항목
-  { number: '3-1', title: '유보통합포털 (입소/입학 신청)', partner: '바로가기', image: './images/childcare.jpg', alt: '유보통합포털', url: 'https://enter.childinfo.go.kr/icms/main/IntroPage.html', guide: '통합회원가입 → 로그인 → 자녀등록 → 기관검색 → 찜하기 → 신청하기' },
-  { number: '3-2', title: '국민건강보험공단 건강IN (영유아검진결과서)', partner: '바로가기', image: './images/info.jpg', alt: '국민건강보험공단 건강IN', url: 'https://www.nhis.or.kr/nhis/index.do', guide: '건강모아 → 자녀건강 → 영유아 건강검진 → 결과 조회' },
-  { number: '3-3', title: '질병관리청 예방접종도우미 (예방접종증명서)', partner: '바로가기', image: './images/gift.jpg', alt: '질병관리청 예방접종도우미', url: 'https://nip.kdca.go.kr/irhp/index.jsp', guide: '1. 예방접종관리 → 우리 가족 예방접종 관리 → 우리 가족 정보 등록 | 2. 예방접종관리 → 전자민원서비스 → 예방접종증명서' },
+  { number: '3-1', title: '유보통합포털', partner: '(입소/입학 신청)', image: './images/childcare.jpg', alt: '유보통합포털', url: 'https://enter.childinfo.go.kr/icms/main/IntroPage.html', guide: '통합회원가입 → 로그인 → 자녀등록 → 기관검색 → 찜하기 → 신청하기' },
+  { number: '3-2', title: '국민건강보험공단 건강IN', partner: '(영유아검진결과서)', image: './images/info.jpg', alt: '국민건강보험공단 건강IN', url: 'https://www.nhis.or.kr/nhis/index.do', guide: '건강모아 → 자녀건강 → 영유아 건강검진 → 결과 조회' },
+  { number: '3-3', title: '질병관리청 예방접종도우미', partner: '(예방접종증명서)', image: './images/gift.jpg', alt: '질병관리청 예방접종도우미', url: 'https://nip.kdca.go.kr/irhp/index.jsp', guide: '1. 예방접종관리 → 우리 가족 예방접종 관리 → 우리 가족 정보 등록 | 2. 예방접종관리 → 전자민원서비스 → 예방접종증명서' },
   { number: '3-4', title: '어린이집&유치원 준비물 체크리스트', partner: 'PDF 다운로드', image: './images/checklist.png', alt: '준비물 체크리스트 이미지', url: './images/checklist.pdf', isDownload: true },
   
   // 일반 상품 리스트
