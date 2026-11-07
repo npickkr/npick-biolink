@@ -164,8 +164,8 @@
 <main class="page">
   <div class="notice" aria-label="제휴 안내">
     <div class="ticker-track">
-      <div class="ticker-group">📣 네이버 브랜드 커넥트, 쿠팡 파트너스, 캐치셀 제휴 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.　좋은 콘텐츠로 보답할게요💕</div>
-      <div class="ticker-group" aria-hidden="true">📣 네이버 브랜드 커넥트, 쿠팡 파트너스, 캐치셀 제휴 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.　좋은 콘텐츠로 보답할게요💕</div>
+      <div class="ticker-group">📣 네이버 브랜드 커넥트, 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.　좋은 콘텐츠로 보답할게요💕</div>
+      <div class="ticker-group" aria-hidden="true">📣 네이버 브랜드 커넥트, 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.　좋은 콘텐츠로 보답할게요💕</div>
     </div>
   </div>
 
@@ -268,7 +268,7 @@
     clearSearch.style.display = raw ? 'block' : 'none';
     resultCount.textContent = raw ? `${visible}개 상품` : '';
     emptyState.style.display = visible ? 'none' : 'block';
-    emptyState.innerHTML = !dataLoaded ? '상품 데이터 파일을 불러오지 못했어요. product-data.js가 이 HTML과 같은 폴더에 있는지 확인해 주세요.' : !products.length ? '아직 등록된 상품이 없어요. product-data.js의 page5Products 목록에 상품을 추가해 주세요.' : raw ? '검색 결과가 없어요.<br>번호 또는 정보 제목을 다시 검색해 주세요.' : emptyDefaultText;
+    emptyState.innerHTML = !dataLoaded ? '상품 데이터 파일을 불러오지 못했어요. product-data.js가 이 HTML과 같은 폴더에 있는지 확인해 주세요.' : !products.length ? '아직 등록된 상품이 없어요.' : raw ? '검색 결과가 없어요.<br>번호 또는 정보 제목을 다시 검색해 주세요.' : emptyDefaultText;
   }
   searchInput.addEventListener('input', filterCards);
   // 메인 페이지에서 전달된 검색어(예: ?q=2-1)를 자동으로 적용합니다.
