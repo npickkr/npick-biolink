@@ -5,7 +5,6 @@ const page1Products = [
   { number: '1-1', title: '이사 무료 방문견적 & 패키지 혜택', image: './images/모두이사.jpg', alt: '이사 무료 방문견적', url: 'https://dbdbdeep.com/ma/link.php?lncd=S00280362TC06046818R' }
 ];
 const stayProducts = [];
-
 const page3Products = [
   // 상단 필수 사이트 및 PDF 안내 항목
   { number: '3-1', title: '유보통합포털', partner: '입소/입학 신청', image: './images/childcare.jpg', alt: '유보통합포털', url: 'https://enter.childinfo.go.kr/icms/main/IntroPage.html', guide: '통합회원가입 → 로그인 → 자녀등록 → 기관검색 → 찜하기 → 신청하기' },
