@@ -14,10 +14,14 @@ a{color:inherit;text-decoration:none}.page{width:min(100%,540px);min-height:100v
 .disclosure svg{width:15px;height:15px;flex:none;color:#5e7897}@keyframes softPulse{0%,100%{background:#f0f6fd}50%{background:#e8f2fc}}
 .profile{display:flex;align-items:center;gap:12px;padding:17px 2px 15px}.avatar{width:62px;height:62px;border-radius:50%;object-fit:cover;border:1px solid #e8edf3;flex:none}.identity{min-width:0;flex:1}.brand{font-size:22px;font-weight:850;letter-spacing:-.8px;line-height:1.2}.tagline{margin-top:5px;font-size:12px;color:#697b91;letter-spacing:-.25px}.share{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:48px;padding:5px 3px;border:0;background:transparent;color:#61758d;cursor:pointer;font:inherit}.share-icon{display:grid;place-items:center;width:36px;height:36px;border:1px solid #e8edf4;border-radius:50%;background:#fbfcfe}.share svg{width:18px;height:18px}.share small{font-size:9px}
 .search{display:flex;align-items:center;gap:9px;height:42px;padding:0 13px;border:1px solid #e4ebf5;border-radius:999px;background:#fbfcff;box-shadow:var(--shadow)}.search svg{width:17px;height:17px;color:#8293a9;flex:none}.search input{width:100%;border:0;outline:0;background:transparent;color:var(--ink);font:inherit;font-size:12px}.search input::placeholder{color:#9aa8bb}.section-title{display:flex;align-items:center;gap:8px;margin:21px 2px 10px;font-size:16px;font-weight:800;letter-spacing:-.45px}.leaf{width:16px;height:16px;color:#55bea0}
-.cards{display:grid;gap:10px}.card{--tint:#f0f7ff;--accent:#5fa8fa;display:flex;align-items:center;gap:11px;min-height:96px;padding:8px;border-radius:15px;background:var(--tint);transition:transform .18s ease,box-shadow .18s ease}.card:hover{transform:translateY(-1px);box-shadow:0 7px 18px rgba(31,55,83,.07)}.card:nth-child(2){--tint:#fff5f3;--accent:#ff7779}.card:nth-child(3){--tint:#f0faf6;--accent:#48c2a0}.card:nth-child(4){--tint:#f7f3ff;--accent:#a078f4}.card:nth-child(5){--tint:#fff8ee;--accent:#ffa23c}.thumb{width:34%;max-width:148px;aspect-ratio:1.52;object-fit:cover;border-radius:10px;background:#f1f3f6;flex:none}.card-copy{min-width:0;flex:1;align-self:center}.headline{display:flex;align-items:center;gap:8px;margin-bottom:5px}.number{display:inline-grid;place-items:center;min-width:29px;height:22px;padding:0 6px;border-radius:999px;background:var(--accent);color:white;font-size:10px;font-weight:800;letter-spacing:.1px}.card-title{font-size:13px;line-height:1.35;font-weight:800;letter-spacing:-.35px;overflow-wrap:anywhere}.card-desc{font-size:10px;line-height:1.45;color:#7b8ba0;letter-spacing:-.2px}.arrow{display:grid;place-items:center;width:27px;height:27px;flex:none;border-radius:50%;background:rgba(255,255,255,.62);color:var(--accent);font-size:20px;line-height:1}.footer{margin-top:20px;padding:13px 0 3px;border-top:1px solid #eef1f6;text-align:center}.footer-label{font-size:10px;color:#8794a7;margin-bottom:10px}.socials{display:flex;justify-content:center;gap:27px}.social{display:flex;flex-direction:column;align-items:center;gap:4px;color:#65758a;font-size:9px}.social-icon{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:#f4f6f9;border:1px solid #e8edf3}.social svg{width:16px;height:16px}.social.youtube .social-icon{color:#e62117}.social.instagram .social-icon{color:#c13584}.social.tiktok .social-icon{color:#111111}.bottom-note{margin-top:14px;color:#a3adba;font-size:9px;text-align:center}.empty{display:none;padding:28px 8px;text-align:center;color:#7f8da1;font-size:12px}
+.cards{display:grid;gap:10px}.card{--tint:#f0f7ff;--accent:#5fa8fa;display:flex;align-items:center;gap:11px;min-height:96px;padding:8px;border-radius:15px;background:var(--tint);transition:transform .18s ease,box-shadow .18s ease}.card:hover{transform:translateY(-1px);box-shadow:0 7px 18px rgba(31,55,83,.07)}.card:nth-child(2){--tint:#fff5f3;--accent:#ff7779}.card:nth-child(3){--tint:#f0faf6;--accent:#48c2a0}.card:nth-child(4){--tint:#f7f3ff;--accent:#a078f4}.card:nth-child(5){--tint:#fff8ee;--accent:#ffa23c}.thumb{width:34%;max-width:148px;aspect-ratio:1.52;object-fit:cover;border-radius:10px;background:#f1f3f6;flex:none}.card-copy{min-width:0;flex:1;align-self:center}.headline{display:flex;align-items:center;gap:8px;margin-bottom:5px}.number{display:inline-grid;place-items:center;min-width:29px;height:22px;padding:0 6px;border-radius:999px;background:var(--accent);color:white;font-size:10px;font-weight:800;letter-spacing:.1px}.card-title{font-size:13px;line-height:1.35;font-weight:800;letter-spacing:-.35px;overflow-wrap:anywhere}
+
+/* 💡 가이드 문구 스타일 (상품명 아래, 작은 글씨, 굵기 없음) */
+.card-guide{font-size:11px;font-weight:normal;color:#666666;margin-top:4px;line-height:1.4;overflow-wrap:anywhere}
+
+.card-desc{font-size:10px;line-height:1.45;color:#7b8ba0;letter-spacing:-.2px}.arrow{display:grid;place-items:center;width:27px;height:27px;flex:none;border-radius:50%;background:rgba(255,255,255,.62);color:var(--accent);font-size:20px;line-height:1}.footer{margin-top:20px;padding:13px 0 3px;border-top:1px solid #eef1f6;text-align:center}.footer-label{font-size:10px;color:#8794a7;margin-bottom:10px}.socials{display:flex;justify-content:center;gap:27px}.social{display:flex;flex-direction:column;align-items:center;gap:4px;color:#65758a;font-size:9px}.social-icon{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:#f4f6f9;border:1px solid #e8edf3}.social svg{width:16px;height:16px}.social.youtube .social-icon{color:#e62117}.social.instagram .social-icon{color:#c13584}.social.tiktok .social-icon{color:#111111}.bottom-note{margin-top:14px;color:#a3adba;font-size:9px;text-align:center}.empty{display:none;padding:28px 8px;text-align:center;color:#7f8da1;font-size:12px}
 @media(min-width:600px){body{padding:24px 0}.page{border:1px solid #edf0f5;border-radius:24px;overflow:hidden}.thumb{max-width:138px}.card{min-height:100px;padding:10px}.card-title{font-size:14px}.card-desc{font-size:11px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
-/* 검색 전후 가로 폭 유지 및 상품 이미지 잘림 방지 */
 html{scrollbar-gutter:stable}
 #productSearchResults .thumb{object-fit:contain;background:#fff}
 </style>
@@ -69,7 +73,6 @@ html{scrollbar-gutter:stable}
   </footer>
 </main>
 
-<!-- product-data.js에서 window.NPICK_PRODUCTS.allProducts를 먼저 설정합니다. -->
 <script src="./product-data.js"></script>
 <script>
 const searchInput = document.getElementById('searchInput');
@@ -83,7 +86,6 @@ const allProducts = hasProductData
   ? window.NPICK_PRODUCTS.allProducts.filter(product => product && typeof product === 'object')
   : [];
 
-// 정규화 함수: 하이픈(-)과 숫자, 한글, 영문을 보존하도록 수정
 function normalizeSearch(value) {
   return String(value ?? '').toLowerCase().replace(/[^a-z0-9가-힣\-]/g, '');
 }
@@ -94,13 +96,29 @@ function renderProductResults(products) {
     const link = document.createElement('a');
     link.className = 'card'; link.href = product.url; link.target = '_blank'; link.rel = 'sponsored noopener noreferrer';
     const img = document.createElement('img'); img.className = 'thumb'; img.src = product.image; img.alt = product.alt || ''; img.loading = 'lazy';
+    
     const copy = document.createElement('div'); copy.className = 'card-copy';
-    const title = document.createElement('div'); title.className = 'card-title'; title.textContent = [product.number, product.title].filter(value => value != null && value !== '').join(' ') + (product.partner ? ' (' + product.partner + ')' : '');
-    if (product.description) {
-      const desc = document.createElement('div'); desc.className = 'card-desc'; desc.textContent = product.description; copy.append(title, desc);
-    } else {
-      copy.append(title);
+    
+    // 상품명 구성 (번호 + 타이틀 + 파트너)
+    const title = document.createElement('div'); 
+    title.className = 'card-title'; 
+    title.textContent = [product.number, product.title].filter(value => value != null && value !== '').join(' ') + (product.partner ? ' (' + product.partner + ')' : '');
+    
+    copy.append(title);
+
+    // 💡 guide 데이터가 있는 경우 상품명 아래에 얇고 작은 글씨로 추가
+    if (product.guide) {
+      const guideEl = document.createElement('div');
+      guideEl.className = 'card-guide';
+      guideEl.textContent = product.guide;
+      copy.append(guideEl);
     }
+
+    if (product.description) {
+      const desc = document.createElement('div'); desc.className = 'card-desc'; desc.textContent = product.description; 
+      copy.append(desc);
+    }
+    
     const arrow = document.createElement('span'); arrow.className = 'arrow'; arrow.textContent = '›'; arrow.setAttribute('aria-hidden', 'true');
     link.append(img, copy, arrow); productSearchResults.append(link);
   });
@@ -112,16 +130,15 @@ function updateSearch() {
   const q = normalizeSearch(raw);
   productDataMessage.hidden = !raw || hasProductData;
 
-  // 1, 2, 3... 카드 번호 검색 처리
   const categoryMatch = raw.match(/^(\d+)-?$/);
   const categoryNumber = categoryMatch ? categoryMatch[1] : '';
 
-  // 상품 매칭 (1-1, 2-1 등 특정 상품번호 또는 검색어 매칭)
   const matchedProducts = q
     ? allProducts.filter(product => {
         const prodNum = normalizeSearch(product.number);
         const prodTitle = normalizeSearch(product.title);
         const prodPartner = normalizeSearch(product.partner);
+        const prodGuide = normalizeSearch(product.guide);
         if (categoryNumber) {
           return prodNum.split('-')[0] === categoryNumber;
         }
@@ -129,14 +146,13 @@ function updateSearch() {
           return prodNum === q;
         }
         return prodNum.includes(q) || prodTitle.includes(q) || prodPartner.includes(q)
-          || normalizeSearch(product.description).includes(q);
+          || prodGuide.includes(q) || normalizeSearch(product.description).includes(q);
       })
     : [];
 
   const isProductSearch = matchedProducts.length > 0;
   renderProductResults(matchedProducts);
 
-  // 카테고리 카드 필터링
   let shown = 0;
   cards.forEach(card => {
     const searchable = normalizeSearch((card.dataset.search || '') + ' ' + card.innerText);
@@ -145,7 +161,6 @@ function updateSearch() {
     if (!raw) {
       match = true;
     } else if (categoryNumber) {
-      // 1, 2, 3 등 대표 카테고리 번호 검색 시
       const href = (card.getAttribute('href') || '').toLowerCase();
       const categoryByHref = href.includes('page1') ? '1'
         : href.includes('stay') ? '2'
@@ -154,7 +169,6 @@ function updateSearch() {
         : href.includes('page5') ? '5' : '';
       match = categoryByHref === categoryNumber;
     } else {
-      // 상품 검색 결과가 없는 일반 단어 검색 시 카테고리 카드 매칭
       match = !!q && !isProductSearch && searchable.includes(q);
     }
 
@@ -168,14 +182,12 @@ function updateSearch() {
 
 searchInput.addEventListener('input', updateSearch);
 
-// URL 파라미터(q) 지원 (예: index.html?q=1-1)
 const initialQuery = new URLSearchParams(window.location.search).get('q');
 if (initialQuery) {
   searchInput.value = initialQuery;
   updateSearch();
 }
 
-// 공유하기: Web Share API가 없으면 주소를 복사합니다.
 document.getElementById('shareButton').addEventListener('click', async () => {
   const shareData = { title: document.title, url: window.location.href };
   if (navigator.share) {
