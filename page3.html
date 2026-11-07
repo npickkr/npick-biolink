@@ -80,21 +80,21 @@
   .share svg { width: 19px; height: 19px; }
   .list { padding: 0 16px 24px; }
   .result-count { font-size: 12px; color: var(--muted); margin: 0 4px 10px; min-height: 15px; }
-  
-  /* 💡 카드 배경색 제거 및 하단 구분선 스타일 적용 */
+
+  /* 💡 카드 배경 흰색 및 입체 그림자 설정 */
   .product {
     display: flex; align-items: center; gap: 14px; width: 100%;
-    min-height: 110px; margin: 0; padding: 12px 4px;
-    border: 0; border-radius: 0; background: transparent;
+    min-height: 122px; margin: 0 0 14px; padding: 12px;
+    border: 0; border-radius: 25px; 
+    background: var(--card); /* 흰색 배경 */
     color: inherit; text-align: left; text-decoration: none;
-    box-shadow: none;
-    border-bottom: 1px solid var(--line);
-    transition: background .15s ease;
+    box-shadow: 0 2px 8px rgba(30, 51, 80, .025); /* 그림자 효과 */
+    transition: transform .15s ease, box-shadow .15s ease;
   }
   .product[hidden] { display: none !important; }
-  .product:hover { background: rgba(255, 255, 255, 0.4); box-shadow: none; }
+  .product:hover { box-shadow: 0 5px 16px rgba(30, 51, 80, .08); }
   .product:active { transform: scale(.99); }
-  
+
   .product img {
     width: 108px; height: 98px; flex: 0 0 108px; object-fit: cover;
     border-radius: 17px; background: #e5ebf2;
@@ -102,7 +102,7 @@
   .product-info { flex: 1; min-width: 0; }
   .product-title {
     font-size: 16px; line-height: 1.45; font-weight: 700;
-    letter-spacing: -0.45px; overflow-wrap: anywhere;
+    letter-spacing: -.45px; overflow-wrap: anywhere;
   }
   .partner { font-weight: 500; }
   
@@ -116,17 +116,16 @@
     overflow-wrap: anywhere;
   }
 
-  .product-subtitle { font-size: 11px; color: var(--muted); margin-top: 3px; }
   .chevron { color: #7e8799; font-size: 28px; line-height: 1; padding: 0 3px; }
   .empty {
     display: none; text-align: center; color: var(--muted); padding: 36px 12px;
-    background: #fff; border-radius: 20px; font-size: 14px; margin-top: 15px;
+    background: #fff; border-radius: 20px; font-size: 14px;
   }
   @media (max-width: 420px) {
     .intro { padding: 21px 16px 17px; }
     h1 { font-size: 25px; }
     .list { padding: 0 12px 22px; }
-    .product { min-height: 95px; padding: 10px 4px; gap: 12px; }
+    .product { min-height: 105px; border-radius: 22px; gap: 12px; padding: 10px; }
     .product img { width: 88px; height: 86px; flex-basis: 88px; border-radius: 14px; }
     .product-title { font-size: 14px; }
     .share { padding: 0 12px; font-size: 13px; }
@@ -137,7 +136,7 @@
     .ticker-track { animation: none; }
     * { scroll-behavior: auto !important; }
   }
-  .product-list { display: grid; gap: 0; }
+  .product-list { display: grid; gap: 12px; }
 
 .sns-footer{margin-top:22px;padding:15px 0 8px;border-top:1px solid #eef1f6;text-align:center;}
 .sns-footer .footer-label{font-size:10px;color:#8794a7;margin-bottom:10px;}
