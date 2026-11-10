@@ -2,7 +2,7 @@
    페이지 1~5의 상품 추가/수정은 이 파일 한 곳에서만 진행합니다.
 */
 const page1Products = [
-  { number: '1-1', title: '이사 무료 방문견적 & 패키지 혜택', partner: '바로가기', image: './images/모두이사.jpg', alt: '이사 무료 방문견적', url: 'https://dbdbdeep.com/ma/link.php?lncd=S00280362TC06046818R' }
+  { number: '1-1', title: '이사 무료 방문견적 & 패키지 혜택', image: './images/모두이사.jpg', alt: '이사 무료 방문견적', url: 'https://dbdbdeep.com/ma/link.php?lncd=S00280362TC06046818R' }
 ];
 
 const stayProducts = [];
