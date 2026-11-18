@@ -1,5 +1,5 @@
 /* N픽 공통 상품 데이터
-   페이지 1~5의 상품 추가/수정은 이 파일 한 곳에서만 진행합니다.
+   페이지 1~6의 상품 추가/수정은 이 파일 한 곳에서만 진행합니다.
 */
 const page1Products = [
   { number: '1-1', title: '이사 무료 방문견적 & 패키지 혜택', image: './images/모두이사.jpg', alt: '이사 무료 방문견적', url: 'https://dbdbdeep.com/ma/link.php?lncd=S00280362TC06046818R' }
@@ -8,14 +8,14 @@ const page1Products = [
 const stayProducts = [];
 
 const page3Products = [
-  // 상단 필수 사이트 및 PDF 안내 항목 (복지로 추가 및 번호 재정렬)
+  // 상단 필수 사이트 및 PDF 안내 항목
   { number: '3-1', title: '유보통합포털', partner: '입소/입학 신청', image: './images/유보통합포털.jpg', alt: '유보통합포털', url: 'https://enter.childinfo.go.kr/icms/main/IntroPage.html', guide: '통합회원가입 → 로그인 → 자녀등록 → 기관검색 → 찜하기 → 신청하기' },
   { number: '3-2', title: '복지로', partner: '보육료/유아학비 신청', image: './images/복지로.jpg', alt: '복지로', url: 'https://www.bokjiro.go.kr/ssis-tbu/index.do', guide: '로그인 → 서비스 신청 → 복지서비스 신청 → 복지급여 신청 → 영유아 항목에서 보육료(어린이집) 또는 유아학비(유치원) 선택 → 저장 후 다음 단계 클릭 → 신청서 작성 및 확인 → 신청하기(제출하기)' },
   { number: '3-3', title: '국민건강보험공단 건강IN', partner: '영유아검진결과서', image: './images/국민건강보험공단.jpg', alt: '국민건강보험공단 건강IN', url: 'https://www.nhis.or.kr/nhis/index.do', guide: '건강모아 → 자녀건강 → 영유아 건강검진 → 결과 조회' },
   { number: '3-4', title: '질병관리청 예방접종도우미', partner: '예방접종증명서', image: './images/질병관리청.jpg', alt: '질병관리청 예방접종도우미', url: 'https://nip.kdca.go.kr/irhp/index.jsp', guide: '1. 예방접종관리 → 우리 가족 예방접종 관리 → 우리 가족 정보 등록 | 2. 예방접종관리 → 전자민원서비스 → 예방접종증명서' },
   { number: '3-5', title: '어린이집&유치원 준비물 체크리스트', partner: 'PDF 다운로드', image: './images/checklist.png', alt: '준비물 체크리스트 이미지', url: './images/checklist.pdf', isDownload: true },
   
-  // 일반 상품 리스트 (번호 순차 조정 완료)
+  // 일반 상품 리스트
   { number: '3-6', title: '자수 고리수건', partner: '네이버', image: './images/수건1.jpg', alt: '자수 고리수건', url: 'https://naver.me/xIF6jEM4' },
   { number: '3-6', title: '자수 고리수건', partner: '쿠팡', image: './images/수건2.jpg', alt: '자수 고리수건', url: 'https://link.coupang.com/a/ikBlFKE9MO' },
   { number: '3-7', title: '수저세트', partner: '네이버', image: './images/수저1.jpg', alt: '수저세트', url: 'https://naver.me/5homGEN7' },
@@ -65,12 +65,15 @@ const page3Products = [
 const page4Products = [];
 const page5Products = [];
 
+const page6Products = [];
+
 window.NPICK_PRODUCTS = {
   page1Products,
   stayProducts,
   page3Products,
   page4Products,
   page5Products,
+  page6Products, 
   usefulInfoProducts: page3Products,
-  allProducts: [...page1Products, ...stayProducts, ...page3Products, ...page4Products, ...page5Products]
+  allProducts: [...page1Products, ...stayProducts, ...page3Products, ...page4Products, ...page5Products, ...page6Products]
 };
