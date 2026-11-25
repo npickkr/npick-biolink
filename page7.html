@@ -190,7 +190,7 @@
     <div class="tools">
       <label class="search-wrap">
         <span class="search-icon" aria-hidden="true">⌕</span>
-        <input id="searchInput" type="search" placeholder="정보를 검색해보세요 (예: 7-1, 청소솔, 살림템)" autocomplete="off">
+        <input id="searchInput" type="search" placeholder="정보를 검색해보세요 (예: 7-1, 접이식, 청소)" autocomplete="off">
         <button id="clearSearch" class="clear" type="button" aria-label="검색어 지우기">×</button>
       </label>
       <button class="share" id="shareButton" type="button" aria-label="페이지 공유">
@@ -278,7 +278,7 @@
     clearSearch.style.display = raw ? 'block' : 'none';
     resultCount.textContent = raw ? `${visible}개 상품` : '';
     emptyState.style.display = visible ? 'none' : 'block';
-    emptyState.innerHTML = !dataLoaded ? '상품 데이터 파일을 불러오지 못했어요. product-data.js가 이 HTML과 같은 폴더에 있는지 확인해 주세요.' : !products.length ? '아직 등록된 상품이 없어요. product-data.js의 page7Products 목록에 상품을 추가해 주세요.' : raw ? '검색 결과가 없어요.<br>번호 또는 정보 제목을 다시 검색해 주세요.' : emptyDefaultText;
+    emptyState.innerHTML = !dataLoaded ? '상품 데이터 파일을 불러오지 못했어요. product-data.js가 이 HTML과 같은 폴더에 있는지 확인해 주세요.' : !products.length ? '아직 등록된 상품이 없어요.' : raw ? '검색 결과가 없어요.<br>번호 또는 정보 제목을 다시 검색해 주세요.' : emptyDefaultText;
   }
 
   searchInput.addEventListener('input', filterCards);
