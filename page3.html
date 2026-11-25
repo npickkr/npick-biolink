@@ -259,22 +259,45 @@
   function filterCards() {
     const raw = searchInput.value.trim();
     const query = normalize(raw);
+    const exactCodeMatch = raw.match(/^(\d+)\s*-\s*(\d+)$/);
+    const categoryMatch = raw.match(/^(\d+)-?$/);
     let visible = 0;
+
     cards.forEach(card => {
+      const cardNum = String(card.dataset.number || '').trim();
       const searchable = normalize([
         card.dataset.number,
         card.dataset.title,
+        card.dataset.partner,
         card.dataset.guide,
         card.innerText
       ].join(' '));
-      const match = !query || searchable.includes(query);
+
+      let match = false;
+      if (!query) {
+        match = true;
+      } else if (exactCodeMatch) {
+        match = cardNum === `${exactCodeMatch[1]}-${exactCodeMatch[2]}`;
+      } else if (categoryMatch) {
+        match = cardNum.split('-')[0] === categoryMatch[1];
+      } else {
+        match = searchable.includes(query);
+      }
+
       card.hidden = !match;
       if (match) visible++;
     });
+
     clearSearch.style.display = raw ? 'block' : 'none';
     resultCount.textContent = raw ? `${visible}개 상품` : '';
     emptyState.style.display = visible ? 'none' : 'block';
-    emptyState.innerHTML = !dataLoaded ? '상품 데이터 파일을 불러오지 못했어요. product-data.js가 이 HTML과 같은 폴더에 있는지 확인해 주세요.' : !products.length ? '아직 등록된 상품이 없어요. product-data.js의 page3Products 목록에 상품을 추가해 주세요.' : raw ? '검색 결과가 없어요.<br>번호 또는 정보 제목을 다시 검색해 주세요.' : emptyDefaultText;
+    emptyState.innerHTML = !dataLoaded
+      ? '상품 데이터 파일을 불러오지 못했어요. product-data.js가 이 HTML과 같은 폴더에 있는지 확인해 주세요.'
+      : !products.length
+        ? '아직 등록된 상품이 없어요. product-data.js의 page3Products 목록에 상품을 추가해 주세요.'
+        : raw
+          ? '검색 결과가 없어요.<br>번호 또는 정보 제목을 다시 검색해 주세요.'
+          : emptyDefaultText;
   }
 
   searchInput.addEventListener('input', filterCards);
