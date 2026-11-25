@@ -66,7 +66,7 @@ const page4Products = [];
 const page5Products = [];
 const page6Products = [];
 const page7Products = [
-  { number: '7-1', title: '아이 손끼임 방지 & 방풍 접이식 문 (미송 이중홀딩도어)', partner: '네이버', image: './images/홀딩도어.jpg', alt: '아이 손끼임 방지 & 방풍 접이식 문 (미송 이중홀딩도어)', url: 'https://naver.me/xbK2oonR' }
+  { number: '7-1', title: '안전을 고려한 접이식문 | 냉난방 에너지 절감 · 공간분리', partner: '네이버', image: './images/홀딩도어.png', alt: '아이 손끼임 방지 & 방풍 접이식 문 (미송 이중홀딩도어)', url: 'https://naver.me/xbK2oonR' }
 ];
 
 const allProducts = [
