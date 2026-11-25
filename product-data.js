@@ -65,7 +65,9 @@ const page3Products = [
 const page4Products = [];
 const page5Products = [];
 const page6Products = [];
-const page7Products = [];
+const page7Products = [
+  { number: '7-1', title: '아이 손끼임 방지 & 방풍 접이식 문 (미송 이중홀딩도어)', partner: '네이버', image: './images/홀딩도어.jpg', alt: '아이 손끼임 방지 & 방풍 접이식 문 (미송 이중홀딩도어)', url: 'https://naver.me/xbK2oonR' }
+];
 
 const allProducts = [
   ...page1Products,
